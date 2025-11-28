@@ -4,10 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock-Paper-Scissors</title>
-    <script type="module" crossorigin src="/rock/assets/index-DTgayxjN.js"></script>
-    <link rel="stylesheet" crossorigin href="/rock/assets/index-R1dV4Ga8.css">
+    <style>
+      /* Basic fallback styling so the page looks correct even if JS is blocked */
+      html,body{height:100%;margin:0}
+      body{background:#ffbbff;color:#fff;font-family:Arial, sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+      .static-title{font-size:1.5rem;font-weight:700;margin:24px 0;text-align:center}
+      .static-sub{font-size:0.9rem;opacity:0.95}
+      .noscript-note{margin-top:12px;font-size:0.9rem;opacity:0.9}
+    </style>
+    <script type="module" crossorigin src="/rock/assets/index-C9_9h1OI.js"></script>
+    <link rel="stylesheet" crossorigin href="/rock/assets/index-C7WE1AKf.css">
   </head>
   <body>
-    <div id="app"></div>
+    <header class="static-title">Kampen om KrökanKronan <div class="static-sub">presented by Isac Wallenius</div></header>
+    <div id="app"></div>
+    <noscript>
+      <div class="noscript-note">JavaScript är avstängt — sidan visar en enkel statisk header. Aktivera JavaScript för full funktionalitet.</div>
+    </noscript>
   </body>
 </html>
