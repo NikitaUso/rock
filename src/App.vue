@@ -11,7 +11,7 @@ const resultIcon = ref('')
 const options = [
   { name: 'Sten', icon: '🪨' },
   { name: 'Sax', icon: '✂️' },
-  { name: 'Påse', icon: '🧻' }
+  { name: 'Påse', icon: '💰' }
 ]
 
 const startGame = () => {
