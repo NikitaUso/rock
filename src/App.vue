@@ -46,6 +46,7 @@ const determineWinner = () => {
 
 <template>
   <main class="container">
+    <h1 class="title">Kampen om KrökanKronan presented by Isac Wallenius</h1>
 
     <div v-if="gameState === 'idle'" class="game-area">
       <button @click="startGame" class="start-btn">START</button>
@@ -58,7 +59,7 @@ const determineWinner = () => {
     <div v-else-if="gameState === 'result'" class="game-area">
       <div class="result-display">
         <span class="icon">{{ resultIcon }}</span>
-        <h2>{{ result }}</h2>
+        <h2 class="result-text">{{ result }}</h2>
       </div>
       <button @click="startGame" class="retry-btn">Spela igen</button>
     </div>
@@ -74,15 +75,15 @@ const determineWinner = () => {
   justify-content: center;
   height: 100vh;
   font-family: 'Arial', sans-serif;
-  background-color: #2c3e50;
+  background-color: #ffbbff;
   color: white;
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+.title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 700;
 }
 
 .game-area {
@@ -97,22 +98,22 @@ h1 {
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
-  background-color: #42b983;
-  color: white;
+  background-color: #ccccff;
+  color: #000;
   border: none;
   border-radius: 8px;
   transition: transform 0.1s, background-color 0.2s;
 }
 
 .start-btn:hover, .retry-btn:hover {
-  background-color: #3aa876;
+  background-color: #b3b3ff;
   transform: scale(1.05);
 }
 
 .countdown {
   font-size: 8rem;
   font-weight: bold;
-  color: #ffcc00;
+  color: #ffffff;
   animation: pop 0.5s ease-in-out;
 }
 
@@ -126,10 +127,14 @@ h1 {
   display: block;
 }
 
-.result-display h2 {
+.result-display .icon {
+  color: #ffffff;
+}
+
+.result-display h2, .result-text {
   font-size: 3rem;
   margin: 10px 0;
-  color: #fff;
+  color: #ffffff;
 }
 
 /* Animation för nedräkningen */
