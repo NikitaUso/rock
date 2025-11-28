@@ -46,7 +46,6 @@ const determineWinner = () => {
 
 <template>
   <main class="container">
-    <h1>Rock-Paper-Scissors</h1>
 
     <div v-if="gameState === 'idle'" class="game-area">
       <button @click="startGame" class="start-btn">START</button>
