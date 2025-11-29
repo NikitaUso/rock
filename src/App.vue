@@ -4,6 +4,9 @@ import { ref } from 'vue'
 // Tillstånd för spelet: 'idle', 'counting', 'result'
 const gameState = ref('idle')
 const count = ref(3)
+// Beats sequence shown during countdown
+const beats = ['3', '2', '1']
+const beatIndex = ref(0)
 const result = ref(null)
 const resultIcon = ref('')
 
@@ -17,19 +20,26 @@ const options = [
 const startGame = () => {
   // Återställ variabler
   gameState.value = 'counting'
+  // start at first beat
+  beatIndex.value = 0
   count.value = 3
   result.value = null
   
-  // Starta timer
+  // Starta timer: total tid 2000ms men visa 3 tydliga takter/beats
+  const stepMs = Math.round(2000 / 3)
   const timer = setInterval(() => {
+    // gå till nästa beat
+    beatIndex.value++
+
+    // uppdatera count för kompatibilitet (visas inte längre som nummer)
     count.value--
-    
-    // När timern når 0
-    if (count.value === 0) {
+
+    // När vi passerat sista beat
+    if (beatIndex.value >= beats.length) {
       clearInterval(timer)
       determineWinner()
     }
-  }, 1000)
+  }, stepMs)
 }
 
 const determineWinner = () => {
@@ -46,14 +56,15 @@ const determineWinner = () => {
 
 <template>
   <main class="container">
-    <h1 class="title">Kampen om KrökanKronan presented by Isak Wallenius</h1>
 
     <div v-if="gameState === 'idle'" class="game-area">
       <button @click="startGame" class="start-btn">START</button>
     </div>
 
     <div v-else-if="gameState === 'counting'" class="game-area">
-      <div class="countdown">{{ count }}</div>
+      <div class="countdown">{{ beats[beatIndex] }}</div>
+
+      <div v-if="beats[beatIndex] === 'PÅSE'" class="pase-note">Om du hänger med: Påse slår Sten men förlorar mot Sax.</div>
     </div>
 
     <div v-else-if="gameState === 'result'" class="game-area">
@@ -111,10 +122,34 @@ const determineWinner = () => {
 }
 
 .countdown {
-  font-size: 8rem;
+  font-size: 6rem;
   font-weight: bold;
   color: #ffffff;
-  animation: pop 0.5s ease-in-out;
+}
+
+.beats-line {
+  margin-top: 12px;
+  font-weight: 700;
+  color: #222;
+}
+
+.beats-line .sep{
+  margin: 0 8px;
+  opacity: 0.6;
+}
+
+.beats-line .current{
+  text-decoration: underline;
+  color: #000;
+}
+
+.pase-note{
+  margin-top:10px;
+  font-size:0.95rem;
+  color:#111;
+  background: rgba(255,255,255,0.6);
+  padding:8px 12px;
+  border-radius:6px;
 }
 
 .result-display {
